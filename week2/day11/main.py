@@ -10,6 +10,9 @@ dealer_hand = []
 
 
 def play():
+    '''Starts the game sequence by Appending two random cards to player and dealer
+    
+    '''
     i = 0
     while (i < 2):
         player_hand.append(random.choice(cards))
