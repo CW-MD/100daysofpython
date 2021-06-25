@@ -1,12 +1,7 @@
 #Coffee Machine
 import data
-#establishing common inputs as variables to avoid typos
-espresso = 'espresso'
-latte = 'latte'
-cappuccino = 'cappuccino'
-off = 'off'
-report = 'report'
-cents = 0
+#
+machine_money = 0
 
 
 def user_input():
@@ -22,6 +17,7 @@ def user_input():
 
 
 def check_resources(drink_name):
+    global machine_money
     drink_ingredients = data.MENU[drink_name]['ingredients']
     for ingred in drink_ingredients:
         #print(ingred)
@@ -32,12 +28,18 @@ def check_resources(drink_name):
             break
     else:
         print('Please insert coins uwu')
-        take_money()
+        money_input = take_money()
+        if money_input >= data.MENU[drink_name]['cost']:
+            machine_money += issue_change(money_input, drink_name)
+            deduct_resources(drink_name)
+            print(f'Here is your {drink_name}')
+        else:
+            print('need more money')
             
 
 def take_money():
     monies = []
-    quarters = int(input('Quarters: '))*25
+    quarters =int(input('Quarters: '))*25
     dimes = int(input('Dimes: '))*10
     nickels = int(input('Nickels: '))*5
     pennies = int(input('Pennies: '))
@@ -45,7 +47,7 @@ def take_money():
     monies.append(dimes)
     monies.append(nickels)
     monies.append(pennies)
-    return sum(monies)
+    return (sum(monies) / 100)
 
 def print_report():
     values = data.resources
@@ -53,5 +55,16 @@ def print_report():
         print(f'{key} : {values[key]} ')
     
 
-#print_report()
+def issue_change(money, drink_name):
+    cost = float(data.MENU[drink_name]['cost'])
+    change = (money - cost)
+    print(f'Your change is ${round(change,5)}')
+    return cost
+    
+def deduct_resources(drink_name):
+    drink_ingredients = data.MENU[drink_name]['ingredients']
+    for ingred in drink_ingredients:
+        data.resources[ingred] -= drink_ingredients[ingred]
+        
+        
 user_input()
