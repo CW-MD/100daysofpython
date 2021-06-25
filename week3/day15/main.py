@@ -36,11 +36,16 @@ def check_resources(drink_name):
             
 
 def take_money():
-    quarters = int(input('Quarters: '))
-    dimes = int(input('Dimes: '))
-    nickels = int(input('Nickels: '))
+    monies = []
+    quarters = int(input('Quarters: '))*25
+    dimes = int(input('Dimes: '))*10
+    nickels = int(input('Nickels: '))*5
     pennies = int(input('Pennies: '))
-    return sum(quarters, dimes, nickels, pennies)
+    monies.append(quarters)
+    monies.append(dimes)
+    monies.append(nickels)
+    monies.append(pennies)
+    return sum(monies)
 
 def print_report():
     values = data.resources
