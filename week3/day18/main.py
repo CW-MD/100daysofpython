@@ -1,3 +1,4 @@
+
 import colorgram
 from turtle import Turtle, Screen, color
 import random
@@ -13,6 +14,16 @@ screen.colormode(255)
 timmy.speed(0)
 
 color_list = colorgram.extract('day18/candies.jpg', 10)
+#print(color_list)
+
+rgb_list = []
+for color in color_list:
+    r = color.rgb.r
+    g = color.rgb.g
+    b = color.rgb.b
+
+    new_color = (r,g,b)
+    rgb_list.append(new_color)
 
 def random_color():
     r = random.randint(0,255)
@@ -73,13 +84,16 @@ directions = [0, 90, 180, 270]
 
 for _ in range(10):
     for _ in range(10):
+        timmy.color(random.choice(rgb_list))
         timmy.pd()
-        timmy.circle(1)
+        timmy.begin_fill()
+        timmy.circle(5)
+        timmy.end_fill()
         timmy.pu()
         timmy.forward(20)
-        timmy.pd()
+        
     timmy.pu()    
-    timmy.sety((timmy.ycor() + 50))
+    timmy.sety((timmy.ycor() + 20))
     timmy.setx((timmy.xcor() - 200))
 
 
