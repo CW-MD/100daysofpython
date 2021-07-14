@@ -12,6 +12,8 @@ win_goal = 200
 won=False
 y_offset = -100
 
+
+
 for num in range(0,6):
     turt = Turtle(shape='turtle')
     turt.pu()
@@ -21,6 +23,8 @@ for num in range(0,6):
     y_offset += 40
     turtle_list.append(turt)
 
+
+prompt = screen.textinput(title='Turtle Gambling Simulator', prompt='Which color turtle do you think will win?')
 
 def race(turtle):
     global won
@@ -35,7 +39,7 @@ while won == False:
     for turtle in turtle_list:
         race(turtle)
     
-prompt = screen.textinput(title='Turtle Gambling Simulator', prompt='Which color turtle do you think will win?')
+
 
 
 
