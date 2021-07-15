@@ -9,14 +9,23 @@ START_POS = [(0,0),(-20,0), (-40, 0)]
 class Snake:
     def __init__(self):
         self.segments = []
-        
-        for pos in START_POS:
-            new_seg = Turtle(shape='square')
-            new_seg.color('white')
-            new_seg.pu()
-            new_seg.goto(pos)
-            self.segments.append(new_seg)
+        self.create_snake()
         self.head = self.segments[0]
+
+    def create_snake(self):
+        for pos in START_POS:
+            self.add_segment(pos)
+
+
+    def add_segment(self, pos):
+        new_seg = Turtle(shape='square')
+        new_seg.color('white')
+        new_seg.pu()
+        new_seg.goto(pos)
+        self.segments.append(new_seg)
+
+    def grow(self):
+        self.add_segment(self.segments[-1].position())
 
 
     def move(self):
