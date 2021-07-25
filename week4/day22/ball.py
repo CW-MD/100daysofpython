@@ -16,3 +16,11 @@ class Ball(Turtle):
 
     def bounce(self):
         self.ymove *= -1
+
+    def collide(self):
+        self.xmove *= -1
+
+    def ball_reset(self):
+        self.hideturtle()
+        self.goto(0,0)
+        self.showturtle()
