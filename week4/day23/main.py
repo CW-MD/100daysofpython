@@ -29,11 +29,9 @@ while game_running:
         if car.xcor() < -300:
             car.hideturtle()
             car_list.remove(car)
-    # x = random.randint(0,len(positions) - 1)
-    # print(x)
-    # car1 = Car(positions[x][0], positions[x][1])
-    # car1.move_car()
-    #     #car = Car()
+        if player.distance(car) < 20:
+            print('Game Over')
+            game_running = False
     print(len(car_list))
     sleep(.1)
     loop_counter+=1
