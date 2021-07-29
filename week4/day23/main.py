@@ -1,25 +1,44 @@
 from turtle import Screen
 from car import Car
+from player import Player
 from time import sleep
 import random
+
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor('white')
 screen.tracer(0)
 game_running = True
+
+screen.listen()
+player = Player()
+
+screen.onkey(player.move_up, 'Up')
 positions = [(250,200),(250,190),(250,180),(250,170),(250,160),(250,150),(250,140),(250,130),(250,120),(250,110),(250,100)]
 
 
+loop_counter = 0
+car_list = []
 while game_running:
     #print(positions[0][1])
-
-    x = random.randint(0,len(positions) - 1)
-    print(x)
-    car1 = Car(positions[x][0], positions[x][1])
-    car1.move_car()
-        #car = Car()
+    if loop_counter % 6 == 0:
+        new_car = Car(random.randint(-280, 280))
+        car_list.append(new_car)
+    for car in car_list:
+        car.move_car()
+        if car.xcor() < -300:
+            car.hideturtle()
+            car_list.remove(car)
+    # x = random.randint(0,len(positions) - 1)
+    # print(x)
+    # car1 = Car(positions[x][0], positions[x][1])
+    # car1.move_car()
+    #     #car = Car()
+    print(len(car_list))
     sleep(.1)
+    loop_counter+=1
     screen.update()
+    
     
 
 
