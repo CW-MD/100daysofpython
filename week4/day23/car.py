@@ -1,4 +1,7 @@
 from turtle import Turtle
+COLORS = ['orange','yellow','green','blue','purple','red']
+CAR_SPEED = 5
+CAR_SPEED_INC = 10
 
 class Car(Turtle):
     def __init__(self, *args):
