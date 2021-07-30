@@ -2,7 +2,7 @@ from turtle import Screen
 from car import Car
 from player import Player
 from time import sleep
-import random
+from score import Score
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -12,28 +12,26 @@ game_running = True
 
 screen.listen()
 player = Player()
-
+score = Score()
+carManager = Car()
 screen.onkey(player.move_up, 'Up')
-positions = [(250,200),(250,190),(250,180),(250,170),(250,160),(250,150),(250,140),(250,130),(250,120),(250,110),(250,100)]
 
 
 loop_counter = 0
-car_list = []
 while game_running:
-    #print(positions[0][1])
-    if loop_counter % 6 == 0:
-        new_car = Car(random.randint(-280, 280))
-        car_list.append(new_car)
-    for car in car_list:
-        car.move_car()
-        if car.xcor() < -300:
-            car.hideturtle()
-            car_list.remove(car)
-        if player.distance(car) < 20:
+    carManager.create_car()
+    if player.ycor() >= 280:
+        score.update_score()
+        player.reset_pos()
+        carManager.increase_speed()
+    carManager.move_car()
+    for x in carManager.car_list:
+        if player.distance(x) < 20:
             print('Game Over')
             game_running = False
-    print(len(car_list))
+    print(len(carManager.car_list))
     sleep(.1)
+
     loop_counter+=1
     screen.update()
     
