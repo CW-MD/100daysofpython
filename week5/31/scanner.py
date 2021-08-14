@@ -25,7 +25,6 @@ except KeyboardInterrupt:
     print('\nExiting Program')
     print(open_list)
     sys.exit()
-    
 except socket.gaierror:
     print('Hostname could not be resolved')
     sys.exit()
