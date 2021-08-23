@@ -1,8 +1,16 @@
 from tkinter import Tk, Canvas, Label, Entry, Button, PhotoImage
-from tkinter.constants import RIGHT
+import pandas
 BACKGROUND_COLOR = "#B1DDC6"
 
+#Pandas
+#Key : Value
+#French : 0 - 100
+#English : 0 - 100
+df = pandas.read_csv('data/french_words.csv')
+translator = df.to_dict()
 
+print(translator['French'][0])
+print(translator['English'][0])
 window = Tk()
 #Images
 CARD_FRONT = PhotoImage(file='images/card_front.png', width=800, height=600)
@@ -17,8 +25,6 @@ canvas = Canvas(width=900, height=650)
 canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
 canvas.grid(column=0,row=0, columnspan=2)
 canvas.create_image(450,350,image = CARD_FRONT)
-# canvas.create_image(250,700, image=WRONG_IMG)
-# canvas.create_image(750,700, image=RIGHT_IMG)
 
 canvas.create_text(450,150, text='Title', font=('Serif', 35, 'italic'))
 canvas.create_text(450,275, text='Word', font=('Sans Serif', 50,))
@@ -27,6 +33,9 @@ yes_button = Button(image=RIGHT_IMG)
 yes_button.grid(column=0,row=1)
 no_button = Button(image=WRONG_IMG)
 no_button.grid(column=1, row=1)
+
+
+
 
 
 
