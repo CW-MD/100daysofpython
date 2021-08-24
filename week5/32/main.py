@@ -20,12 +20,19 @@ print(translator[0][FR], translator[0][EN])
 
 
 def new_card():
-    global current_card
+    global current_card, flip_timer
+    window.after_cancel(flip_timer)
+    
+    
+    # if answer == True and current_card:
+    #     translator.remove(current_card)
+   
     current_card = random.choice(translator)
     canvas.itemconfig(card, image=CARD_FRONT)
     canvas.itemconfig(card_title, text='French')
     canvas.itemconfig(card_word, text=current_card[FR])
-    window.after(3000,flip)
+    flip_timer = window.after(3000,flip)
+    
 
 
 def flip():
@@ -43,6 +50,8 @@ RIGHT_IMG =  PhotoImage(file='images/right.png' , width=100, height=100)
 WRONG_IMG = PhotoImage(file='images/wrong.png', width=100, height=100)
 #
 
+flip_timer = window.after(3000, flip)
+
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 window.title('Flash Cards')
 canvas = Canvas(width=900, height=650)
@@ -59,7 +68,7 @@ yes_button.grid(column=0,row=1)
 no_button = Button(image=WRONG_IMG, command=new_card)
 no_button.grid(column=1, row=1)
 
-new_card()
+new_card
 
 
 
