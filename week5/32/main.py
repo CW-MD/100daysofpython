@@ -16,22 +16,19 @@ EN = 'English'
 df = pandas.read_csv('data/french_words.csv')
 translator = df.to_dict(orient='records')
 current_card = {}
-print(translator[0][FR], translator[0][EN])
 
 
 def new_card():
-    global current_card, flip_timer
+    global current_card
+    global flip_timer
     window.after_cancel(flip_timer)
-    
-    
-    # if answer == True and current_card:
-    #     translator.remove(current_card)
-   
     current_card = random.choice(translator)
     canvas.itemconfig(card, image=CARD_FRONT)
     canvas.itemconfig(card_title, text='French')
     canvas.itemconfig(card_word, text=current_card[FR])
     flip_timer = window.after(3000,flip)
+
+
     
 
 
@@ -39,6 +36,12 @@ def flip():
     canvas.itemconfig(card, image=CARD_BACK)
     canvas.itemconfig(card_title, text='English')
     canvas.itemconfig(card_word, text=current_card[EN])
+
+def known():
+    global current_card
+    translator.remove(current_card)
+    print(len(translator))
+    new_card()
 
 
 
@@ -62,13 +65,13 @@ card = canvas.create_image(450,350,image = CARD_FRONT)
 card_title = canvas.create_text(450,150, text='Title', font=('Serif', 35, 'italic'))
 card_word = canvas.create_text(450,275, text='Word', font=('Sans Serif', 50,))
 
-yes_button = Button(image=RIGHT_IMG, command=new_card)
+yes_button = Button(image=RIGHT_IMG, command=known)
 yes_button.grid(column=0,row=1)
 
 no_button = Button(image=WRONG_IMG, command=new_card)
 no_button.grid(column=1, row=1)
 
-new_card
+new_card()
 
 
 
