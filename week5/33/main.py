@@ -23,7 +23,7 @@ if today_tuple in birthday_dict:
     path = f'./letter_templates/letter_{random_pick}.txt'
     with open(path) as filereader:
         content = filereader.read()
-        content.replace('[NAME]', person.name )
+        content = content.replace('[NAME]', person.name )
         
     with smtplib.SMTP(SMTP_PROV) as connection:
         connection.starttls()
